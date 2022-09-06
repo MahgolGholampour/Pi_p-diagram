@@ -1,13 +1,14 @@
+#created by Mahgol Gholampour
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.ndimage import measurements
 import random
 
 
-#li & lf are desired lengths that we want to find Pi in them.
-li = 20
-lf = 51
-stepl =15
+#li & lf are lengths that we want to find Pi in them.
+li = 70
+lf = 146
+stepl = 25
 
 #defining random colors for distinguishing lines
 number_of_colors = 0
@@ -17,13 +18,13 @@ for l in range(li , lf ,stepl):
 color = ["#"+''.join([random.choice('0123456789ABCDEF') for j in range(6)])
              for i in range(number_of_colors)]
 
-#to have a smoother diagram , N has to be large.
+#To have a smoother diagram , N has to be large.
 N = 500
 parts = 200
 Pis=[]
 P_axis=[]
 
-#P is a variable that accepts probabalities in a limited interval.
+#P is a variable that accepts probabalities in a limited interval.It helps us to look at changes more accurately.
 P = np.linspace(0.52, 0.65, num=parts)
 for m, p in enumerate(P):
     P_axis.append(p)
@@ -38,7 +39,7 @@ for l in range(li , lf ,stepl):
             flag = False
             lattice = randomLattice < p
 
-#Any home in each random lattice has a label.The lable depends on the neighbors of the home.
+#Any site in each random lattice has a label.The lable depends on the neighbors of the home.For example, label 1 is related to first connected sites and connection here means to be the nearest neighbors.
             labels, num = measurements.label(lattice)
             list1 = np.array(labels[0])
             list2 = np.array(labels[l - 1])
